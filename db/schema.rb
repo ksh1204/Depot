@@ -15,10 +15,13 @@ ActiveRecord::Schema.define(:version => 20100502032336) do
     t.integer  "product_id"
     t.integer  "order_id"
     t.integer  "quantity"
-    t.integer  "total_price"
+    t.integer  "total_price", :limit => 10, :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "line_items", ["order_id"], :name => "line_items_order_id_fk"
+  add_index "line_items", ["product_id"], :name => "line_items_product_id_fk"
 
   create_table "orders", :force => true do |t|
     t.string   "name"
@@ -47,5 +50,8 @@ ActiveRecord::Schema.define(:version => 20100502032336) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  add_foreign_key "line_items", "orders", :name => "line_items_order_id_fk"
+  add_foreign_key "line_items", "products", :name => "line_items_product_id_fk"
 
 end
