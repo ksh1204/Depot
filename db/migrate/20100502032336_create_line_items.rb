@@ -9,13 +9,13 @@ class CreateLineItems < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_foreign_key(:line_items, :product)
-    add_foreign_key(:line_items, :order)
+    add_foreign_key(:line_items, :products)
+    add_foreign_key(:line_items, :orders)
   end
 
   def self.down
-  	remove_foreign_key(:line_items, :product)
-  	remove_foregin_key(:line_items, :order)
+  	remove_foreign_key(:line_items, :products)
+  	remove_foregin_key(:line_items, :orders)
     drop_table :line_items
   end
 end
