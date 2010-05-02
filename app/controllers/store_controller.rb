@@ -11,7 +11,7 @@ class StoreController < ApplicationController
   	respond_to do |format|
   	  format.js if request.xhr?
   	  format.html {redirect_to_index}
-	  end
+	end
   rescue ActiveRecord::RecordNotFound
   	logger.error("Attempt to access invalid product #{params[:id]}")
   	redirect_to_index("Invalid product")
@@ -54,5 +54,10 @@ class StoreController < ApplicationController
   		flash[:notice] = msg if msg
   		redirect_to :action => 'index'
   	end
+  	
+  protected
+  
+	def authorize
+	end
 
 end
